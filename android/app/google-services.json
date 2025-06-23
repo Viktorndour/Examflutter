@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "326788551975",
+    "project_id": "undercover-94e92",
+    "storage_bucket": "undercover-94e92.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326788551975:android:d489254a5f93c4b9128502",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQjZbLq-nQZKyy4_3fslI58pJpe7BTp2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326788551975:android:734576ed2f3cd0c2128502",
+        "android_client_info": {
+          "package_name": "com.example.victor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQjZbLq-nQZKyy4_3fslI58pJpe7BTp2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
