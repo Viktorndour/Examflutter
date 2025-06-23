@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:victor/Modèles/employee.dart';
-import 'package:victor/service/employee_service.dart';
+import 'package:hive/hive.dart'; // ✅ Import Hive
+import 'package:victor/modeles/employee.dart';
 
 class EmployeeFormScreen extends StatefulWidget {
   final Function(Employee) onEmployeeAdded;
@@ -41,10 +41,11 @@ class _EmployeeFormScreenState extends State<EmployeeFormScreen> {
         ponctuel: true,
       );
 
-      // Ajout dans la base SQLite via le service
-      //await EmployeeService().add(newEmployee);
+      // ✅ Étape 5 : ajout dans Hive
+      final box = Hive.box<Employee>('employees');
+      await box.add(newEmployee);
 
-      // Puis notifier la page précédente (ex: EmployeeListScreen)
+      // 🔔 Notifier la page précédente si besoin
       widget.onEmployeeAdded(newEmployee);
       Navigator.pop(context);
     }

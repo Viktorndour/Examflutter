@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:victor/Modèles/employee.dart';
+import 'package:victor/modeles/employee.dart';
 import 'package:victor/service/employee_service.dart';
 import 'package:victor/screen/employee_list_screen.dart';
 

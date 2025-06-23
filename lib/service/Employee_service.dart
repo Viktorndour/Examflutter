@@ -1,4 +1,4 @@
-import 'package:victor/Modèles/employee.dart';
+import 'package:victor/modeles/employee.dart';
 
 class EmployeeService {
   static final EmployeeService _instance = EmployeeService._internal();

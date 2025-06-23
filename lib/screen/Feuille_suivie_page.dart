@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:victor/Pages/dashboard_page.dart';
+import 'package:victor/modeles/suiviemploye.dart';
 
 class FeuilleSuiviePage extends StatefulWidget {
   const FeuilleSuiviePage({super.key});
@@ -15,6 +17,51 @@ class _FeuilleSuiviePageState extends State<FeuilleSuiviePage> {
       List.generate(31, (_) => TextEditingController());
   final List<TextEditingController> absencesControllers =
       List.generate(31, (_) => TextEditingController(text: '0'));
+
+  @override
+  void initState() {
+    super.initState();
+    chargerDonneesEnregistrees(); // ✅ charge les données à l’ouverture
+  }
+
+  void chargerDonneesEnregistrees() {
+    final box = Hive.box<SuiviEmploye>('feuille_suivi');
+
+    for (int i = 0; i < box.length && i < 31; i++) {
+      final suivi = box.getAt(i);
+      if (suivi != null) {
+        nomsControllers[i].text = suivi.nom;
+        matriculesControllers[i].text = suivi.matricule;
+        absencesControllers[i].text = suivi.absences.toString();
+      }
+    }
+  }
+
+  void saveData() async {
+    final box = Hive.box<SuiviEmploye>('feuille_suivi');
+    await box.clear();
+
+    for (int i = 0; i < 31; i++) {
+      final nom = nomsControllers[i].text.trim();
+      final matricule = matriculesControllers[i].text.trim();
+      final abs = int.tryParse(absencesControllers[i].text) ?? 0;
+
+      if (nom.isNotEmpty || matricule.isNotEmpty || abs > 0) {
+        box.add(SuiviEmploye(
+          nom: nom,
+          matricule: matricule,
+          absences: abs,
+        ));
+      }
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Données enregistrées avec succès ✅'),
+        backgroundColor: Colors.teal,
+      ),
+    );
+  }
 
   @override
   void dispose() {
@@ -95,6 +142,11 @@ class _FeuilleSuiviePageState extends State<FeuilleSuiviePage> {
             },
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: saveData,
+        child: const Icon(Icons.save),
+        backgroundColor: Colors.teal,
       ),
     );
   }
